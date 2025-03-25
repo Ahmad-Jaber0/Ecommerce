@@ -9,7 +9,7 @@ from .serializers import ReviewSerializer
 
 def update_product_rating(product):
     rating = product.reviews.aggregate(avg_ratings=Avg('rating'))['avg_ratings']
-    product.ratings = rating if rating is not None else 0
+    product.rating = rating if rating is not None else 0
     product.save()
 
 @api_view(['POST'])
@@ -20,13 +20,15 @@ def create_or_update_review(request, pk):
     data = request.data
 
     rating = data.get('rating', 0)
-    if not (1 <= rating <= 5):
-        return Response({"error": "يجب أن يكون التقييم بين 1 و 5"}, status=400)
+    comment = data.get('comment', '').strip()
+
+    if not (0 <= rating <= 5):
+        return Response({"error": "يجب أن يكون التقييم بين 0 و 5"}, status=400)
 
     review, created = Review.objects.update_or_create(
         user=user,
         product=product,
-        defaults={'rating': rating, 'comment': data.get('comment', '')}
+        defaults={'rating': rating, 'comment': comment}
     )
 
     update_product_rating(product)
