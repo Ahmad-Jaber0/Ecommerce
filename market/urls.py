@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
 
 # إنشاء واجهة التوثيق
 schema_view = get_schema_view(
@@ -30,7 +32,6 @@ schema_view = get_schema_view(
     ),
     public=True,  # هل التوثيق عام أم خاص؟
 )
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
 urlpatterns = [
@@ -40,5 +41,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view()),
      path('schema/', SpectacularAPIView.as_view(), name='schema'),
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('reviews/', include('reviews.urls')),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
     
 ]
