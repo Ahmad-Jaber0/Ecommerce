@@ -18,9 +18,27 @@ from django.contrib import admin
 from django.urls import path,include
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+
+# إنشاء واجهة التوثيق
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Products API",  # اسم الـ API
+        default_version='v1',  # الإصدار
+        description="API for managing products and reviews",  # وصف
+    ),
+    public=True,  # هل التوثيق عام أم خاص؟
+)
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('product.urls')),
     path('api/', include('account.urls')),
     path('api/token/', TokenObtainPairView.as_view()),
+     path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    
 ]
