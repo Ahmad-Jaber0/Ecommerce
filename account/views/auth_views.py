@@ -11,7 +11,7 @@ def register(request):
 
     if serializer.is_valid():
         serializer.save()
-        return Response({'detail': 'تم تسجيل الحساب بنجاح!'}, status=status.HTTP_201_CREATED)
+        return Response({'detail': 'Account registration successful!'}, status=status.HTTP_201_CREATED)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

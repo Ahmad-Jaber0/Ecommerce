@@ -19,11 +19,11 @@ def create_or_update_review(request, pk):
     product = get_object_or_404(Product, id=pk)
     data = request.data
 
-    rating = data.get('rating', 0)
+    rating = data.get('rating', 1)
     comment = data.get('comment', '').strip()
 
-    if not (0 <= rating <= 5):
-        return Response({"error": "يجب أن يكون التقييم بين 0 و 5"}, status=400)
+    if not (1 <= rating <= 5):
+        return Response({"error": "Rating must be between 1 and 5"}, status=400)
 
     review, created = Review.objects.update_or_create(
         user=user,
@@ -32,7 +32,7 @@ def create_or_update_review(request, pk):
     )
 
     update_product_rating(product)
-    return Response({'details': 'تم إنشاء التقييم' if created else 'تم تحديث التقييم'})
+    return Response({'details': 'Rating created' if created else 'Rating updated'})
 
 
 @api_view(['DELETE'])
@@ -45,6 +45,6 @@ def delete_review(request, pk):
     if review:
         review.delete()
         update_product_rating(product)
-        return Response({'details': 'تم حذف التقييم'})
+        return Response({'details': 'Review deleted'})
     
-    return Response({'error': 'لم يتم العثور على التقييم'}, status=404)
+    return Response({'error': 'Review not found'}, status=404)
