@@ -1,14 +1,14 @@
 from rest_framework import serializers
 from .models import Product
-from reviews.serializers import ReviewSerializer 
+from reviews.serializers import ReviewSerializer
 
-class ProductSerializers(serializers.ModelSerializer):
-    reviews = serializers.SerializerMethodField(method_name='get_reviews', read_only=True)
+class ProductSerializer(serializers.ModelSerializer):
+    reviews = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = "__all__"
+        read_only_fields = ['rating','createdAt','user']
 
     def get_reviews(self, obj):
-        reviews = obj.reviews.all()
-        return ReviewSerializer(reviews, many=True).data
+        return ReviewSerializer(obj.reviews.all(), many=True).data
