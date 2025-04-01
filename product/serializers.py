@@ -8,7 +8,12 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = "__all__"
-        read_only_fields = ['rating','createdAt','user']
+        extra_kwargs = {
+            'rating': {'read_only': True},
+            'createdAt': {'read_only': True},
+            'user': {'read_only': True},
+            'id': {'read_only': True},
+        }
 
     def get_reviews(self, obj):
         return ReviewSerializer(obj.reviews.all(), many=True).data
