@@ -38,15 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # Third-party apps
     'rest_framework',
-    'product.apps.ProductConfig',
     'django_filters',
     'rest_framework_simplejwt',
+    'drf_spectacular',
+    
+    # Local apps
+    'product.apps.ProductConfig',
     'account.apps.AccountConfig',
-        'drf_spectacular',
-        'reviews',
-        'order',
-
+    'reviews',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -103,13 +106,13 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
-    
-
 }
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Products API',
     'DESCRIPTION': 'API for managing products and reviews',
     'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False, 
 }
 
 SIMPLE_JWT = {
