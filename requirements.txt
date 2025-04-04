@@ -1,0 +1,20 @@
+# Core Django
+Django==4.2.0
+djangorestframework==3.14.0
+
+# Authentication
+djangorestframework-simplejwt==5.2.2
+PyJWT==2.7.0
+
+# API Documentation
+drf-spectacular==0.26.2
+
+# Image Processing
+Pillow==10.0.0
+
+# Filtering & Utilities
+django-filter==23.2
+python-dotenv==1.0.0
+
+# CORS
+django-cors-headers==4.2.0
