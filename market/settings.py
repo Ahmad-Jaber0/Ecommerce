@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
         'drf_spectacular',
         'reviews',
+        'order',
 
 ]
 

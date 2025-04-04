@@ -38,10 +38,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('product.urls')),
     path('api/', include('account.urls')),
-    path('api/token/', TokenObtainPairView.as_view()),
-     path('schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('reviews/', include('reviews.urls')),
+    path('orders/', include('order.urls')),
+    path('api/token/', TokenObtainPairView.as_view()),
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     
