@@ -140,12 +140,10 @@ EMAIL_USE_SSL = False  # or True depending on your provider
 ```
 Make sure to replace these values with actual credentials or use environment variables.
 
-## 🐜 License
-This project is open-source and available under the MIT License.
 
 ## 💡 Future Enhancements
 - Real-time order tracking.
 - Integrate Stripe/PayPal for payments.
 - Advanced analytics dashboard.
 
-🚀 Developed with Django REST Framework ❤️
+🚀 Developed with Django REST Framework. 
